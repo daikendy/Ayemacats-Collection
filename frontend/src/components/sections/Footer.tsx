@@ -20,16 +20,16 @@ export default function Footer() {
           <span className="font-heading text-lg font-light tracking-wide text-[#C9A84C]">Follow the Legacy</span>
           <div className="flex items-center gap-4">
             {/* Social Icons as stylized Wax Seals */}
-            <a href="https://shopee.ph" target="_blank" rel="noopener noreferrer" className="size-11 flex items-center justify-center bg-[#C9A84C]/20 hover:bg-[#C9A84C] text-[#F5ECD7] rounded-full border border-[#D8C3A5]/30 hover:scale-105 transition-all duration-300 shadow-md">
+            <a href="https://ph.shp.ee/ov7vr00g?smtt=0.0.9" target="_blank" rel="noopener noreferrer" className="size-11 flex items-center justify-center bg-[#C9A84C]/20 hover:bg-[#C9A84C] text-[#F5ECD7] rounded-full border border-[#D8C3A5]/30 hover:scale-105 transition-all duration-300 shadow-md">
               <span className="font-heading font-bold text-base select-none">Sh</span>
             </a>
-            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="size-11 flex items-center justify-center bg-[#C9A84C]/20 hover:bg-[#C9A84C] text-[#F5ECD7] rounded-full border border-[#D8C3A5]/30 hover:scale-105 transition-all duration-300 shadow-md">
+            <a href="https://www.tiktok.com/@ayemacatcollectionss?_r=1&_t=ZS-9653Ue0VEFm" target="_blank" rel="noopener noreferrer" className="size-11 flex items-center justify-center bg-[#C9A84C]/20 hover:bg-[#C9A84C] text-[#F5ECD7] rounded-full border border-[#D8C3A5]/30 hover:scale-105 transition-all duration-300 shadow-md">
               <span className="font-heading font-bold text-base select-none">Tk</span>
             </a>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="size-11 flex items-center justify-center bg-[#C9A84C]/20 hover:bg-[#C9A84C] text-[#F5ECD7] rounded-full border border-[#D8C3A5]/30 hover:scale-105 transition-all duration-300 shadow-md">
+            <a href="https://www.facebook.com/ayemacatcollections" target="_blank" rel="noopener noreferrer" className="size-11 flex items-center justify-center bg-[#C9A84C]/20 hover:bg-[#C9A84C] text-[#F5ECD7] rounded-full border border-[#D8C3A5]/30 hover:scale-105 transition-all duration-300 shadow-md">
               <span className="font-heading font-bold text-base select-none">Fb</span>
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="size-11 flex items-center justify-center bg-[#C9A84C]/20 hover:bg-[#C9A84C] text-[#F5ECD7] rounded-full border border-[#D8C3A5]/30 hover:scale-105 transition-all duration-300 shadow-md">
+            <a href="https://www.instagram.com/ayemacatcollections?igsh=bWFheTZ6MnJyb3Ay" target="_blank" rel="noopener noreferrer" className="size-11 flex items-center justify-center bg-[#C9A84C]/20 hover:bg-[#C9A84C] text-[#F5ECD7] rounded-full border border-[#D8C3A5]/30 hover:scale-105 transition-all duration-300 shadow-md">
               <span className="font-heading font-bold text-base select-none">Ig</span>
             </a>
           </div>

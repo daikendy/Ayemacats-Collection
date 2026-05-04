@@ -1,11 +1,27 @@
 "use client"
 
 import Image from "next/image";
-import { useState, type FormEvent } from "react";
+import { useState, type FormEvent, useEffect, useRef } from "react";
 import { LucideArrowRight } from "lucide-react";
 
 export default function Hero() {
   const [recipient, setRecipient] = useState("");
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -18,6 +34,12 @@ export default function Hero() {
 
   return (
     <section id="hero" className="relative overflow-hidden select-none pb-8 animate-in fade-in duration-700">
+      {/* Paper/linen texture overlay */}
+      <div 
+        className="absolute inset-0 opacity-[0.05] pointer-events-none mix-blend-multiply select-none z-0 bg-[url('https://www.transparenttextures.com/patterns/cardboard-flat.png')]"
+        style={{ backgroundRepeat: "repeat" }}
+      />
+
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-6 pb-16 pt-8 md:grid-cols-12 md:gap-12 md:px-10 md:pb-24 md:pt-12">
         
         {/* Copy column */}
@@ -144,9 +166,12 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Social Proof Bar */}
+      {/* Social Proof Bar - Intersection Observer animation */}
       <div
-        className="relative mx-auto mb-0 mt-6 max-w-7xl border-y px-6 py-5 md:px-10 animate-in fade-in duration-1000 select-none"
+        ref={ref}
+        className={`relative mx-auto mb-0 mt-6 max-w-7xl border-y px-6 py-5 md:px-10 select-none transition-all duration-600 ease-out ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
+        }`}
         style={{
           borderColor: "rgba(201,168,76,0.45)",
           background: "linear-gradient(180deg, rgba(239,226,197,0.6), rgba(245,236,215,0.3))",

@@ -1,12 +1,37 @@
-import Image from "next/image";
+"use client"
+
+import { useEffect, useRef, useState } from "react"
+import Image from "next/image"
 
 export default function Reviews() {
+  const [isVisible, setIsVisible] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.1 }
+    )
+    if (ref.current) observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <section id="reviews" className="relative bg-[#EAE0C9]/30 border-t border-[#D8C3A5]/30 py-24 px-6 md:px-20 select-none">
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/cardboard-flat.png')]" />
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 items-start">
+      {/* Paper/linen texture overlay */}
+      <div 
+        className="absolute inset-0 opacity-[0.05] pointer-events-none mix-blend-multiply select-none z-0 bg-[url('https://www.transparenttextures.com/patterns/cardboard-flat.png')]"
+        style={{ backgroundRepeat: "repeat" }}
+      />
+
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 items-start relative z-10">
         {/* TikTok Section */}
-        <div className="flex-1 flex flex-col gap-6 w-full animate-in fade-in slide-in-from-left-6 duration-1000">
+        <div className="flex-1 flex flex-col gap-6 w-full animate-in fade-in duration-1000">
           <span className="font-script text-3xl text-[#2D4A3E] italic tracking-wide">
             Trending Romance
           </span>
@@ -40,7 +65,7 @@ export default function Reviews() {
         </div>
 
         {/* Customer Reviews Section */}
-        <div className="flex-1 flex flex-col gap-6 w-full animate-in fade-in slide-in-from-right-6 duration-1000">
+        <div ref={ref} className="flex-1 flex flex-col gap-6 w-full">
           <span className="font-script text-3xl text-[#C9A84C] italic font-normal tracking-wide">
             Precious Testimonials
           </span>
@@ -50,7 +75,14 @@ export default function Reviews() {
           
           <div className="flex flex-col gap-6 mt-2">
             {/* Review 1 */}
-            <div className="relative bg-[#F9F3E8] border border-[#D8C3A5]/40 p-5 rounded-xl flex flex-col gap-3 shadow-md transform hover:rotate-1 duration-300 max-w-md self-start">
+            <div 
+              className="relative bg-[#F9F3E8] border border-[#D8C3A5]/40 p-5 rounded-xl flex flex-col gap-3 shadow-md transform hover:rotate-1 max-w-md self-start transition-all duration-600 ease-out"
+              style={{
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? "translateY(0)" : "translateY(30px)",
+                transitionDelay: isVisible ? "0ms" : "0ms",
+              }}
+            >
               <div className="flex items-center justify-between">
                 <span className="font-heading font-semibold text-base text-[#3B2A1A]">Isabella F.</span>
                 <span className="text-xs text-[#2D4A3E] tracking-widest uppercase italic">Manila, PH</span>
@@ -61,7 +93,14 @@ export default function Reviews() {
             </div>
 
             {/* Review 2 */}
-            <div className="relative bg-[#F9F3E8] border border-[#D8C3A5]/40 p-5 rounded-xl flex flex-col gap-3 shadow-md transform hover:-rotate-1 duration-300 max-w-md self-end">
+            <div 
+              className="relative bg-[#F9F3E8] border border-[#D8C3A5]/40 p-5 rounded-xl flex flex-col gap-3 shadow-md transform hover:-rotate-1 max-w-md self-end transition-all duration-600 ease-out"
+              style={{
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? "translateY(0)" : "translateY(30px)",
+                transitionDelay: isVisible ? "150ms" : "0ms",
+              }}
+            >
               <div className="flex items-center justify-between">
                 <span className="font-heading font-semibold text-base text-[#3B2A1A]">Nathaniel D.</span>
                 <span className="text-xs text-[#2D4A3E] tracking-widest uppercase italic">Cebu, PH</span>
@@ -74,5 +113,5 @@ export default function Reviews() {
         </div>
       </div>
     </section>
-  );
+  )
 }

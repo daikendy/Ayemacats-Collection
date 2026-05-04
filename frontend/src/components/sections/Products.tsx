@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 
 type RecipientKey = "any" | "mom" | "partner" | "friend" | "self"
 
@@ -52,6 +52,22 @@ const products = [
 export default function Products() {
   const [pick, setPick] = useState<RecipientKey>("any")
   const [recipient, setRecipient] = useState<string | null>(null)
+  const [isVisible, setIsVisible] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.1 }
+    )
+    if (ref.current) observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [])
 
   // Read the recipient name set from the hero form (sessionStorage)
   useEffect(() => {
@@ -114,14 +130,19 @@ export default function Products() {
         </div>
 
         {/* scattered cards */}
-        <div className="mt-16 grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8">
+        <div ref={ref} className="mt-16 grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8">
           {products.map((p, i) => {
             const isRecommended = pick !== "any" && p.recommendedFor.includes(pick)
             const isDimmed = pick !== "any" && !isRecommended
             return (
               <div
                 key={p.title}
-                className={`group ${p.offset} animate-in fade-in slide-in-from-bottom duration-700`}
+                className={`group ${p.offset} transition-all duration-600 ease-out`}
+                style={{
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible ? "translateY(0)" : "translateY(30px)",
+                  transitionDelay: isVisible ? `${i * 150}ms` : "0ms",
+                }}
               >
                 <article
                   className={`relative ${p.rotate} transition-all duration-700 ease-out hover:rotate-0 hover:-translate-y-2 ${

@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import { useState } from "react"
+import { LucidePlay } from "lucide-react"
 
 const videos = [
   {
@@ -69,7 +70,7 @@ export default function TikTok() {
               handmade things. We&apos;re grateful you&apos;re here.
             </p>
             <a
-              href="https://tiktok.com"
+              href="https://www.tiktok.com/@ayemacatcollectionss?_r=1&_t=ZS-9653Ue0VEFm"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 font-heading text-sm uppercase tracking-[0.25em] text-[#C9A84C] underline decoration-2 underline-offset-[6px] hover:text-[#F5ECD7] cursor-pointer transition"
@@ -88,15 +89,20 @@ export default function TikTok() {
               className={`group flex flex-col justify-between border border-[#C9A84C]/30 bg-[#2D4A3E] p-4.5 rounded-xl shadow-xl hover:shadow-2xl hover:scale-[1.03] transition-all duration-700 select-none cursor-pointer hover:rotate-0 hover:z-30 h-[520px] md:h-[640px] relative ${v.rotate} ${v.nudge}`}
             >
               {/* Image visual wrapper */}
-              <div className="relative flex-1 rounded-lg overflow-hidden border border-[#C9A84C]/20 w-full h-full shadow-inner">
+              <div className="relative flex-1 rounded-lg overflow-hidden border border-[#C9A84C]/20 w-full h-full shadow-inner flex items-center justify-center">
                 <Image
                   src={v.poster}
                   alt={v.caption}
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover group-hover:scale-105 duration-700 transition"
+                  className="object-cover group-hover:scale-105 duration-700 transition opacity-80"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#2D4A3E]/40 via-transparent to-transparent pointer-events-none" />
+
+                {/* Play Button exactly from user request */}
+                <div className="relative z-20 size-16 rounded-full bg-[#6B1E2E]/80 backdrop-blur-md border border-[#C9A84C] flex items-center justify-center group-hover:scale-110 duration-500 shadow-xl">
+                  <LucidePlay className="size-6 text-[#F5ECD7] fill-[#F5ECD7] ml-1" />
+                </div>
 
                 {/* Styled Views Badge exactly from reference */}
                 <div className="absolute top-4 left-4 bg-[#211d17]/85 backdrop-blur-md border border-[#F5ECD7]/15 rounded-full px-3.5 py-1.5 flex items-center gap-2 z-20 shadow-md">
@@ -119,8 +125,8 @@ export default function TikTok() {
       {/* Fully Playable Fullscreen Lightbox Modal Video Player */}
       {activeVideo && (
         <div className="fixed inset-0 bg-[#211d17]/95 backdrop-blur-md z-[100] flex items-center justify-center p-4 select-none animate-in fade-in duration-300">
-          <button 
-            onClick={() => setActiveVideo(null)} 
+          <button
+            onClick={() => setActiveVideo(null)}
             className="absolute top-6 right-6 text-[#F5ECD7] hover:text-[#C9A84C] text-5xl cursor-pointer transition z-50 select-none"
           >
             ×

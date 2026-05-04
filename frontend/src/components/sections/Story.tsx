@@ -1,11 +1,39 @@
+"use client"
+
 import Image from "next/image"
+import { useEffect, useRef, useState } from "react"
 
 export default function Story() {
+  const [isVisible, setIsVisible] = useState(false)
+  const ref = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.1 }
+    )
+    if (ref.current) observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <section id="story" className="relative overflow-hidden select-none bg-[#EAE0C9]">
+    <section ref={ref} id="story" className="relative overflow-hidden select-none bg-[#EAE0C9]">
+      {/* Paper/linen texture overlay */}
+      <div 
+        className="absolute inset-0 opacity-[0.05] pointer-events-none mix-blend-multiply select-none z-0 bg-[url('https://www.transparenttextures.com/patterns/cardboard-flat.png')]"
+        style={{ backgroundRepeat: "repeat" }}
+      />
+
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-14 px-6 py-24 md:grid-cols-12 md:gap-16 md:px-10 md:py-32">
         {/* Image, asymmetric, slightly tilted */}
-        <div className="md:col-span-5 md:pt-16 animate-in fade-in slide-in-from-left-4 duration-1000">
+        <div className={`md:col-span-5 md:pt-16 transition-all duration-600 ease-out ${
+          isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-[30px]"
+        }`}>
           <div className="relative">
             <div
               aria-hidden
@@ -28,7 +56,9 @@ export default function Story() {
         </div>
 
         {/* Copy, asymmetric offset */}
-        <div className="md:col-span-7 md:pl-8 flex flex-col justify-center animate-in fade-in slide-in-from-right-4 duration-1000">
+        <div className={`md:col-span-7 md:pl-8 flex flex-col justify-center transition-all duration-600 ease-out ${
+          isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-[30px]"
+        }`}>
           <div>
             <p className="font-script text-3xl text-[#6B1E2E]">Our Story</p>
           </div>
