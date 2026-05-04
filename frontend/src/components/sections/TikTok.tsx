@@ -147,6 +147,7 @@ export default function TikTok() {
           <div className="relative aspect-[9/16] h-[82vh] max-w-md rounded-2xl overflow-hidden border border-[#C9A84C]/40 bg-[#1A1A1A] flex items-center justify-center shadow-2xl">
             {isTikTok ? (
               <iframe
+                key={activeVideo}
                 src={getEmbedUrl(activeVideo)}
                 className="w-full h-full border-0"
                 allow="autoplay; encrypted-media; picture-in-picture"
@@ -155,6 +156,7 @@ export default function TikTok() {
               />
             ) : (
               <video
+                key={activeVideo}
                 src={activeVideo}
                 className="w-full h-full object-cover"
                 controls
