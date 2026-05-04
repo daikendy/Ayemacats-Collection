@@ -1,36 +1,69 @@
 "use client"
 
-import Image from "next/image";
-import { useState, type FormEvent, useEffect, useRef } from "react";
-import { LucideArrowRight } from "lucide-react";
+import Image from "next/image"
+import { useState, type FormEvent, useEffect, useRef } from "react"
+import { LucideArrowRight, LucideX, LucideHeart } from "lucide-react"
 
 export default function Hero() {
-  const [recipient, setRecipient] = useState("");
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const [recipient, setRecipient] = useState("")
+  const [isVisible, setIsVisible] = useState(false)
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false)
+  const [typedMessage, setTypedMessage] = useState("")
+  const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
+          setIsVisible(true)
+          observer.disconnect()
         }
       },
       { threshold: 0.1 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
+    )
+    if (ref.current) observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [])
+
+  const fullDraft = `Dearest ${recipient || "One"},
+
+Some thoughts are simply too beautiful to be lost to the cold, fleeting glow of a digital screen. This message was made to be read slowly, by candlelight, and held in your hands—exactly the way letters were meant to be two hundred years ago.
+
+With all my love and devotion.`
+
+  useEffect(() => {
+    if (!isPreviewOpen) return
+
+    let index = 0
+    setTypedMessage("")
+
+    const interval = setInterval(() => {
+      if (index < fullDraft.length) {
+        setTypedMessage(fullDraft.slice(0, index + 1))
+        index++
+      } else {
+        clearInterval(interval)
+      }
+    }, 30)
+
+    return () => clearInterval(interval)
+  }, [isPreviewOpen, fullDraft])
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (typeof window !== "undefined" && recipient.trim()) {
-      sessionStorage.setItem("ayemacats:recipient", recipient.trim());
+    e.preventDefault()
+    if (recipient.trim()) {
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem("ayemacats:recipient", recipient.trim())
+      }
+      setIsPreviewOpen(true)
     }
-    const el = document.getElementById("products");
-    el?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
+  }
+
+  const closeAndProceed = () => {
+    setIsPreviewOpen(false)
+    const el = document.getElementById("products")
+    el?.scrollIntoView({ behavior: "smooth", block: "start" })
+  }
 
   return (
     <section id="hero" className="relative overflow-hidden select-none pb-8 animate-in fade-in duration-700">
@@ -40,8 +73,14 @@ export default function Hero() {
         style={{ backgroundRepeat: "repeat" }}
       />
 
-      <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-6 pb-16 pt-8 md:grid-cols-12 md:gap-12 md:px-10 md:pb-24 md:pt-12">
+      {/* Warm flickering candlelight ambient glow */}
+      <div 
+        className="absolute inset-0 opacity-20 pointer-events-none mix-blend-overlay z-0 animate-pulse duration-[3000ms]"
+        style={{ background: "radial-gradient(circle at 50% 50%, rgba(201,168,76,0.3) 0%, transparent 70%)" }}
+      />
 
+      <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-6 pb-16 pt-8 md:grid-cols-12 md:gap-12 md:px-10 md:pb-24 md:pt-12">
+        
         {/* Copy column */}
         <div className="md:col-span-6 lg:col-span-7 flex flex-col items-center text-center md:items-start md:text-left justify-center gap-6 animate-in fade-in slide-in-from-left-6 duration-1000 relative z-20">
           <div className="flex flex-col gap-3">
@@ -49,7 +88,7 @@ export default function Hero() {
             <p className="font-script text-2xl text-[#6B1E2E]/80 tracking-wide select-none">
               Est. in a small town, sealed with love
             </p>
-            <h1 className="mt-1 font-heading text-7xl leading-[0.95] tracking-tight text-[#3B2A1A] text-balance sm:text-6xl md:text-7xl lg:text-[5.5rem] font-light">
+            <h1 className="mt-1 font-heading text-5xl leading-[0.95] tracking-tight text-[#3B2A1A] text-balance sm:text-6xl md:text-7xl lg:text-[5.5rem] font-light">
               Words That <br />
               <span className="italic text-[#6B1E2E] font-semibold">Last Forever</span>
             </h1>
@@ -169,8 +208,9 @@ export default function Hero() {
       {/* Social Proof Bar - Intersection Observer animation */}
       <div
         ref={ref}
-        className={`relative mx-auto mb-0 mt-6 max-w-7xl border-y px-6 py-5 md:px-10 select-none transition-all duration-600 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
-          }`}
+        className={`relative mx-auto mb-0 mt-6 max-w-7xl border-y px-6 py-5 md:px-10 select-none transition-all duration-600 ease-out ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
+        }`}
         style={{
           borderColor: "rgba(201,168,76,0.45)",
           background: "linear-gradient(180deg, rgba(239,226,197,0.6), rgba(245,236,215,0.3))",
@@ -199,6 +239,56 @@ export default function Hero() {
           </li>
         </ul>
       </div>
+
+      {/* Emotional Interactive Calligraphy Modal */}
+      {isPreviewOpen && (
+        <div className="fixed inset-0 bg-[#3B2A1A]/85 backdrop-blur-md z-[100] flex items-center justify-center p-4 select-none animate-in fade-in duration-300">
+          <button
+            onClick={() => setIsPreviewOpen(false)}
+            className="absolute top-6 right-6 text-[#F5ECD7] hover:text-[#C9A84C] text-4xl cursor-pointer transition z-50 select-none focus:outline-none"
+          >
+            <LucideX className="size-8" />
+          </button>
+          
+          <div className="relative max-w-lg w-full bg-[#F5ECD7] border-2 border-[#C9A84C] p-8 md:p-12 rounded-lg shadow-2xl overflow-hidden flex flex-col gap-6 animate-in zoom-in-95 duration-500">
+            {/* Paper overlay inside modal */}
+            <div
+              className="absolute inset-0 opacity-[0.06] pointer-events-none mix-blend-multiply select-none z-0 bg-[url('https://www.transparenttextures.com/patterns/cardboard-flat.png')]"
+              style={{ backgroundRepeat: "repeat" }}
+            />
+            
+            <div className="relative z-10 flex flex-col justify-between h-full">
+              <div>
+                <span className="font-heading text-xs tracking-widest text-[#C9A84C] uppercase font-semibold block mb-2">
+                  Live Preview
+                </span>
+                <p className="font-script text-3xl text-[#6B1E2E]">Your letter draft</p>
+                <div className="h-px w-full bg-[#C9A84C]/30 my-4" />
+                <p className="font-serif text-lg leading-relaxed text-[#3B2A1A] min-h-[160px] whitespace-pre-wrap select-none tracking-wide">
+                  {typedMessage}
+                </p>
+              </div>
+
+              {/* Decorative Wax Seal & Next Steps */}
+              <div className="mt-8 pt-4 border-t border-[#C9A84C]/30 flex flex-col gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="bg-[#6B1E2E] text-[#C9A84C] border border-[#C9A84C]/50 size-10 rounded-full flex items-center justify-center shadow-lg transform rotate-6 animate-pulse select-none">
+                    <LucideHeart className="size-5 fill-[#C9A84C]" />
+                  </div>
+                  <p className="font-script text-lg text-[#6B1E2E]/80">Written by Aya, hand-sealed with wax.</p>
+                </div>
+                <button
+                  onClick={closeAndProceed}
+                  className="w-full flex items-center justify-center gap-3 rounded-xl bg-[#6B1E2E] hover:bg-[#6B1E2E]/90 px-6 py-3.5 font-heading text-sm uppercase tracking-[0.2em] text-[#F5ECD7] shadow-[0_4px_14px_rgba(107,30,46,0.35)] transition duration-300 hover:scale-[1.02] cursor-pointer"
+                >
+                  <span>Select your gift box</span>
+                  <LucideArrowRight className="size-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
-  );
+  )
 }

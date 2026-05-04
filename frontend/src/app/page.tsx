@@ -3,6 +3,7 @@
 import Navigation from "@/components/sections/Navigation";
 import Hero from "@/components/sections/Hero";
 import Story from "@/components/sections/Story";
+import Craft from "@/components/sections/Craft";
 import Products from "@/components/sections/Products";
 import HowItWorks from "@/components/sections/HowItWorks";
 import TikTok from "@/components/sections/TikTok";
@@ -16,6 +17,7 @@ export default function Home() {
       <main>
         <Hero />
         <Story />
+        <Craft />
         <Products />
         <HowItWorks />
         <TikTok />
