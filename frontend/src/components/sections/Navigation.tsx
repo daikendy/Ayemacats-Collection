@@ -1,10 +1,19 @@
-import { LucideHeart, LucideMenu } from "lucide-react";
+import Image from "next/image"
+import { LucideMenu } from "lucide-react";
 
 export default function Navigation() {
   return (
     <nav className="sticky top-0 z-50 bg-[#F5ECD7]/80 backdrop-blur-md border-b border-[#D8C3A5]/40 px-6 md:px-12 py-4 flex items-center justify-between shadow-sm select-none">
       <div className="flex items-center gap-3">
-        <LucideHeart className="text-[#6B1E2E] fill-[#6B1E2E] animate-pulse duration-2000 size-5" />
+        <div className="relative size-9 rounded-full overflow-hidden border border-[#C9A84C]/40 select-none shadow-sm">
+          <Image 
+            src="/logo.jpg" 
+            alt="Ayemacats logo" 
+            fill 
+            sizes="36px"
+            className="object-cover" 
+          />
+        </div>
         <span className="font-heading text-2xl font-bold tracking-widest text-[#3B2A1A]">
           AYEMACATS
         </span>

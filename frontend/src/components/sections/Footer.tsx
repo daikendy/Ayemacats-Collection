@@ -1,11 +1,19 @@
+import Image from "next/image"
+
 export default function Footer() {
   return (
     <footer className="relative bg-[#3B2A1A] text-[#F5ECD7] py-16 px-6 md:px-12 select-none border-t border-[#D8C3A5]/20">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
         <div className="flex flex-col items-center md:items-start gap-4">
           <div className="flex items-center gap-3">
-            <div className="bg-[#C9A84C] text-white size-8 rounded-full flex items-center justify-center font-heading font-bold select-none shadow-sm">
-              A
+            <div className="relative size-10 rounded-full overflow-hidden border border-[#C9A84C]/40 select-none shadow-sm bg-white">
+              <Image 
+                src="/logo.jpg" 
+                alt="Ayemacats logo" 
+                fill 
+                sizes="40px"
+                className="object-cover" 
+              />
             </div>
             <span className="font-heading font-bold text-2xl tracking-widest select-none">
               AYEMACATS

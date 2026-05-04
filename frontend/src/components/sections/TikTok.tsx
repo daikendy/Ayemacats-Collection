@@ -6,7 +6,7 @@ import { LucidePlay } from "lucide-react"
 
 const videos = [
   {
-    url: "https://assets.mixkit.co/videos/preview/mixkit-cinematic-scene-of-a-woman-opening-a-gift-box-41551-large.mp4",
+    url: "https://www.tiktok.com/@ayemacatcollectionss/video/7324199902571990277?is_from_webapp=1&sender_device=pc&web_id=7452804418628437522",
     poster: "/scroll_letter_unboxing.png",
     caption: "the unboxing that broke the internet",
     views: "4.2M",
@@ -14,7 +14,7 @@ const videos = [
     nudge: "md:translate-y-4",
   },
   {
-    url: "https://assets.mixkit.co/videos/preview/mixkit-hand-unboxing-a-gift-box-by-candlelight-42407-large.mp4",
+    url: "https://www.tiktok.com/@ayemacatcollectionss/video/7457962166247902471?is_from_webapp=1&sender_device=pc&web_id=7452804418628437522",
     poster: "/our_story_medieval.png",
     caption: "how we seal each letter",
     views: "1.8M",
@@ -22,7 +22,7 @@ const videos = [
     nudge: "md:-translate-y-4",
   },
   {
-    url: "https://assets.mixkit.co/videos/preview/mixkit-writing-a-letter-with-a-fountain-pen-41549-large.mp4",
+    url: "https://www.tiktok.com/@ayemacatcollectionss/video/7554030059791650055?is_from_webapp=1&sender_device=pc&web_id=7452804418628437522",
     poster: "/dried_flowers_aesthetic.png",
     caption: "behind the workshop door",
     views: "920K",
@@ -33,6 +33,19 @@ const videos = [
 
 export default function TikTok() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null)
+
+  // Get TikTok Embed URL helper
+  const getEmbedUrl = (url: string) => {
+    if (url.includes("tiktok.com")) {
+      const match = url.match(/video\/(\d+)/)
+      if (match && match[1]) {
+        return `https://www.tiktok.com/embed/v2/${match[1]}`
+      }
+    }
+    return url
+  }
+
+  const isTikTok = activeVideo ? activeVideo.includes("tiktok.com") : false
 
   return (
     <section
@@ -132,13 +145,22 @@ export default function TikTok() {
             ×
           </button>
           <div className="relative aspect-[9/16] h-[82vh] max-w-md rounded-2xl overflow-hidden border border-[#C9A84C]/40 bg-[#1A1A1A] flex items-center justify-center shadow-2xl">
-            <video
-              src={activeVideo}
-              className="w-full h-full object-cover"
-              controls
-              autoPlay
-              loop
-            />
+            {isTikTok ? (
+              <iframe
+                src={getEmbedUrl(activeVideo)}
+                className="w-full h-full border-0 select-none"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+              />
+            ) : (
+              <video
+                src={activeVideo}
+                className="w-full h-full object-cover"
+                controls
+                autoPlay
+                loop
+              />
+            )}
           </div>
         </div>
       )}
