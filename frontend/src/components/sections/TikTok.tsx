@@ -10,7 +10,7 @@ const videos = [
     poster: "/scroll_letter_unboxing.png",
     caption: "the unboxing that broke the internet",
     views: "4.2M",
-    rotate: "-rotate-[3deg]",
+    rotate: "md:-rotate-[3deg]",
     nudge: "md:translate-y-4",
   },
   {
@@ -18,7 +18,7 @@ const videos = [
     poster: "/our_story_medieval.png",
     caption: "how we seal each letter",
     views: "1.8M",
-    rotate: "rotate-[2deg]",
+    rotate: "md:rotate-[2deg]",
     nudge: "md:-translate-y-4",
   },
   {
@@ -26,7 +26,7 @@ const videos = [
     poster: "/dried_flowers_aesthetic.png",
     caption: "behind the workshop door",
     views: "920K",
-    rotate: "-rotate-[1.5deg]",
+    rotate: "md:-rotate-[1.5deg]",
     nudge: "md:translate-y-2",
   },
 ]
@@ -64,7 +64,7 @@ export default function TikTok() {
 
       <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32 flex flex-col gap-16">
         {/* heading on top */}
-        <div className="flex flex-col md:flex-row items-end justify-between gap-8 animate-in fade-in duration-1000">
+        <div className="flex flex-col md:flex-row items-center text-center md:items-end md:text-left justify-between gap-8 animate-in fade-in duration-1000">
           <div className="max-w-xl">
             <p className="font-script text-3xl text-[#C9A84C]">
               As seen on TikTok
@@ -77,7 +77,7 @@ export default function TikTok() {
             </h2>
           </div>
 
-          <div className="flex flex-col items-start gap-4">
+          <div className="flex flex-col items-center md:items-start gap-4">
             <p className="max-w-sm font-serif text-lg leading-relaxed text-[#F5ECD7]/80">
               We never planned to go viral. The internet just has a soft spot for slow,
               handmade things. We&apos;re grateful you&apos;re here.

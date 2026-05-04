@@ -35,21 +35,21 @@ export default function Hero() {
   return (
     <section id="hero" className="relative overflow-hidden select-none pb-8 animate-in fade-in duration-700">
       {/* Paper/linen texture overlay */}
-      <div 
+      <div
         className="absolute inset-0 opacity-[0.05] pointer-events-none mix-blend-multiply select-none z-0 bg-[url('https://www.transparenttextures.com/patterns/cardboard-flat.png')]"
         style={{ backgroundRepeat: "repeat" }}
       />
 
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-6 pb-16 pt-8 md:grid-cols-12 md:gap-12 md:px-10 md:pb-24 md:pt-12">
-        
+
         {/* Copy column */}
-        <div className="md:col-span-6 lg:col-span-7 flex flex-col items-start justify-center gap-6 animate-in fade-in slide-in-from-left-6 duration-1000 relative z-20">
+        <div className="md:col-span-6 lg:col-span-7 flex flex-col items-center text-center md:items-start md:text-left justify-center gap-6 animate-in fade-in slide-in-from-left-6 duration-1000 relative z-20">
           <div className="flex flex-col gap-3">
             {/* Pressed by Hand Detail */}
             <p className="font-script text-2xl text-[#6B1E2E]/80 tracking-wide select-none">
               Est. in a small town, sealed with love
             </p>
-            <h1 className="mt-1 font-heading text-5xl leading-[0.95] tracking-tight text-[#3B2A1A] text-balance md:text-7xl lg:text-[5.5rem] font-light">
+            <h1 className="mt-1 font-heading text-7xl leading-[0.95] tracking-tight text-[#3B2A1A] text-balance sm:text-6xl md:text-7xl lg:text-[5.5rem] font-light">
               Words That <br />
               <span className="italic text-[#6B1E2E] font-semibold">Last Forever</span>
             </h1>
@@ -95,7 +95,7 @@ export default function Hero() {
                 <LucideArrowRight className="size-4 text-[#C9A84C] group-hover:translate-x-1 transition" />
               </button>
             </div>
-            <p className="mt-4 flex items-center gap-3 font-serif text-sm text-[#3B2A1A]/65">
+            <p className="mt-4 flex items-center justify-center md:justify-start gap-3 font-serif text-sm text-[#3B2A1A]/65">
               <span className="h-px w-6 bg-[#C9A84C]" />
               or{" "}
               <a
@@ -107,7 +107,7 @@ export default function Hero() {
             </p>
           </form>
 
-          <div className="mt-4 flex items-center gap-4 font-serif text-sm italic text-[#3B2A1A]/65 select-none">
+          <div className="mt-4 flex items-center justify-center md:justify-start gap-4 font-serif text-sm italic text-[#3B2A1A]/65 select-none">
             <span className="h-px w-10 bg-[#C9A84C]" />
             &ldquo;It arrived like a secret from another century.&rdquo;
           </div>
@@ -169,9 +169,8 @@ export default function Hero() {
       {/* Social Proof Bar - Intersection Observer animation */}
       <div
         ref={ref}
-        className={`relative mx-auto mb-0 mt-6 max-w-7xl border-y px-6 py-5 md:px-10 select-none transition-all duration-600 ease-out ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
-        }`}
+        className={`relative mx-auto mb-0 mt-6 max-w-7xl border-y px-6 py-5 md:px-10 select-none transition-all duration-600 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
+          }`}
         style={{
           borderColor: "rgba(201,168,76,0.45)",
           background: "linear-gradient(180deg, rgba(239,226,197,0.6), rgba(245,236,215,0.3))",
