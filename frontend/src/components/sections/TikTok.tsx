@@ -33,6 +33,7 @@ const videos = [
 
 export default function TikTok() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null)
+  const [iframeSrc, setIframeSrc] = useState<string>("")
 
   // Get TikTok Embed URL helper
   const getEmbedUrl = (url: string) => {
@@ -43,6 +44,18 @@ export default function TikTok() {
       }
     }
     return url
+  }
+
+  const openVideo = (url: string) => {
+    setIframeSrc(getEmbedUrl(url))
+    setActiveVideo(url)
+  }
+
+  const closeVideo = () => {
+    setIframeSrc("")
+    setTimeout(() => {
+      setActiveVideo(null)
+    }, 50)
   }
 
   const isTikTok = activeVideo ? activeVideo.includes("tiktok.com") : false
@@ -98,7 +111,7 @@ export default function TikTok() {
           {videos.map((v, i) => (
             <div
               key={v.caption}
-              onClick={() => setActiveVideo(v.url)}
+              onClick={() => openVideo(v.url)}
               className={`group flex flex-col justify-between border border-[#C9A84C]/30 bg-[#2D4A3E] p-4.5 rounded-xl shadow-xl hover:shadow-2xl hover:scale-[1.03] transition-all duration-700 select-none cursor-pointer hover:rotate-0 hover:z-30 h-[520px] md:h-[640px] relative ${v.rotate} ${v.nudge}`}
             >
               {/* Image visual wrapper */}
@@ -139,7 +152,7 @@ export default function TikTok() {
       {activeVideo && (
         <div className="fixed inset-0 bg-[#211d17]/95 backdrop-blur-md z-[100] flex items-center justify-center p-4 animate-in fade-in duration-300">
           <button
-            onClick={() => setActiveVideo(null)}
+            onClick={closeVideo}
             className="absolute top-6 right-6 text-[#F5ECD7] hover:text-[#C9A84C] text-5xl cursor-pointer transition z-50"
           >
             ×
@@ -148,7 +161,7 @@ export default function TikTok() {
             {isTikTok ? (
               <iframe
                 key={activeVideo}
-                src={getEmbedUrl(activeVideo)}
+                src={iframeSrc}
                 className="w-full h-full border-0"
                 allow="autoplay; encrypted-media; picture-in-picture"
                 allowFullScreen
