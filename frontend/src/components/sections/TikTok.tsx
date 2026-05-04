@@ -137,10 +137,10 @@ export default function TikTok() {
 
       {/* Fully Playable Fullscreen Lightbox Modal Video Player */}
       {activeVideo && (
-        <div className="fixed inset-0 bg-[#211d17]/95 backdrop-blur-md z-[100] flex items-center justify-center p-4 select-none animate-in fade-in duration-300">
+        <div className="fixed inset-0 bg-[#211d17]/95 backdrop-blur-md z-[100] flex items-center justify-center p-4 animate-in fade-in duration-300">
           <button
             onClick={() => setActiveVideo(null)}
-            className="absolute top-6 right-6 text-[#F5ECD7] hover:text-[#C9A84C] text-5xl cursor-pointer transition z-50 select-none"
+            className="absolute top-6 right-6 text-[#F5ECD7] hover:text-[#C9A84C] text-5xl cursor-pointer transition z-50"
           >
             ×
           </button>
@@ -148,9 +148,10 @@ export default function TikTok() {
             {isTikTok ? (
               <iframe
                 src={getEmbedUrl(activeVideo)}
-                className="w-full h-full border-0 select-none"
+                className="w-full h-full border-0"
                 allow="autoplay; encrypted-media; picture-in-picture"
                 allowFullScreen
+                sandbox="allow-popups allow-popups-to-escape-sandbox allow-scripts allow-top-navigation allow-same-origin"
               />
             ) : (
               <video
