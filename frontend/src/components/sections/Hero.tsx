@@ -74,13 +74,13 @@ With all my love and devotion.`
       />
 
       {/* Warm flickering candlelight ambient glow */}
-      <div 
+      <div
         className="absolute inset-0 opacity-20 pointer-events-none mix-blend-overlay z-0 animate-pulse duration-[3000ms]"
         style={{ background: "radial-gradient(circle at 50% 50%, rgba(201,168,76,0.3) 0%, transparent 70%)" }}
       />
 
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-6 pb-16 pt-8 md:grid-cols-12 md:gap-12 md:px-10 md:pb-24 md:pt-12">
-        
+
         {/* Copy column */}
         <div className="md:col-span-6 lg:col-span-7 flex flex-col items-center text-center md:items-start md:text-left justify-center gap-6 animate-in fade-in slide-in-from-left-6 duration-1000 relative z-20">
           <div className="flex flex-col gap-3">
@@ -88,7 +88,7 @@ With all my love and devotion.`
             <p className="font-script text-2xl text-[#6B1E2E]/80 tracking-wide select-none">
               Est. in a small town, sealed with love
             </p>
-            <h1 className="mt-1 font-heading text-5xl leading-[0.95] tracking-tight text-[#3B2A1A] text-balance sm:text-6xl md:text-7xl lg:text-[5.5rem] font-light">
+            <h1 className="mt-1 font-heading text-7xl leading-[0.95] tracking-tight text-[#3B2A1A] text-balance sm:text-6xl md:text-7xl lg:text-[5.5rem] font-light">
               Words That <br />
               <span className="italic text-[#6B1E2E] font-semibold">Last Forever</span>
             </h1>
@@ -208,9 +208,8 @@ With all my love and devotion.`
       {/* Social Proof Bar - Intersection Observer animation */}
       <div
         ref={ref}
-        className={`relative mx-auto mb-0 mt-6 max-w-7xl border-y px-6 py-5 md:px-10 select-none transition-all duration-600 ease-out ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
-        }`}
+        className={`relative mx-auto mb-0 mt-6 max-w-7xl border-y px-6 py-5 md:px-10 select-none transition-all duration-600 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
+          }`}
         style={{
           borderColor: "rgba(201,168,76,0.45)",
           background: "linear-gradient(180deg, rgba(239,226,197,0.6), rgba(245,236,215,0.3))",
@@ -249,14 +248,14 @@ With all my love and devotion.`
           >
             <LucideX className="size-8" />
           </button>
-          
+
           <div className="relative max-w-lg w-full bg-[#F5ECD7] border-2 border-[#C9A84C] p-8 md:p-12 rounded-lg shadow-2xl overflow-hidden flex flex-col gap-6 animate-in zoom-in-95 duration-500">
             {/* Paper overlay inside modal */}
             <div
               className="absolute inset-0 opacity-[0.06] pointer-events-none mix-blend-multiply select-none z-0 bg-[url('https://www.transparenttextures.com/patterns/cardboard-flat.png')]"
               style={{ backgroundRepeat: "repeat" }}
             />
-            
+
             <div className="relative z-10 flex flex-col justify-between h-full">
               <div>
                 <span className="font-heading text-xs tracking-widest text-[#C9A84C] uppercase font-semibold block mb-2">
